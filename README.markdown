@@ -12,12 +12,14 @@ Play with [github-pr-resource](https://github.com/telia-oss/github-pr-resource) 
 
 # Setup
 
-```shell
-fly \
-  set-pipeline \
-  --target your-target \
-  --pipeline="Pullrequest Check" \
-  --config=pipeline.yml \
-  --var github-token="$GITHUB_TOKEN" \
-  --non-interactive
-```
+1. Set the pipeline:
+
+    ```shell
+    $ fly \
+        set-pipeline \
+        --target your-target \
+        --pipeline="Pullrequest Check" \
+        --config=pipeline.yml \
+        --non-interactive
+    ```
+

@@ -11,6 +11,5 @@ resources:
   - name: source
     type: git
     source:
-      uri: git@github.com:suhlig/spike-concourse-pr-check.git
+      uri: https://github.com/suhlig/spike-concourse-pr-check
       branch: master
-      access_token: ((github-token))
