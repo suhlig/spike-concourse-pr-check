@@ -33,6 +33,7 @@ resources:
   - name: pull-request
     type: pull-request
     check_every: 24h
+    webhook_token: ((github-webhook-token))
     source:
       repository: suhlig/spike-concourse-pr-check
       access_token: ((github-status-token))
