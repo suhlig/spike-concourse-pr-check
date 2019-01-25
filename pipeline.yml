@@ -1,11 +1,27 @@
 jobs:
-  - name: Check PR
+  - name: Unit-Test
     plan:
     - aggregate:
       - get: source
         trigger: false
+      - get: pull-request
+        trigger: true
+        version: every
+    - put: pull-request
+      params:
+        path: pull-request
+        status: pending
     - task: Perform Test
       file: source/tasks/test.yml
+      on_failure:
+        put: pull-request
+        params:
+          path: pull-request
+          status: failure
+    - put: pull-request
+      params:
+        path: pull-request
+        status: success
 
 resources:
   - name: source
@@ -13,3 +29,16 @@ resources:
     source:
       uri: https://github.com/suhlig/spike-concourse-pr-check
       branch: master
+
+  - name: pull-request
+    type: pull-request
+    check_every: 24h
+    source:
+      repository: suhlig/spike-concourse-pr-check
+      access_token: ((github-status-token))
+
+resource_types:
+- name: pull-request
+  type: docker-image
+  source:
+    repository: teliaoss/github-pr-resource

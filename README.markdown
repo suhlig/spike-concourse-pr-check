@@ -12,14 +12,17 @@ Play with [github-pr-resource](https://github.com/telia-oss/github-pr-resource) 
 
 # Setup
 
+1. [Create an access token](https://github.com/settings/tokens) with `repo:status` scope
+
+   Copy the value and export it as environment variable `GITHUB_STATUS_TOKEN`.
+
 1. Set the pipeline:
 
     ```shell
     $ fly \
         set-pipeline \
-        --target your-target \
-        --pipeline="Pullrequest Check" \
+        --target uh \
+        --pipeline="Pull Requests" \
         --config=pipeline.yml \
-        --non-interactive
+        --var github-status-token="$GITHUB_STATUS_TOKEN"
     ```
-

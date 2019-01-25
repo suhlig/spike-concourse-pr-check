@@ -3,15 +3,20 @@ platform: linux
 
 image_resource:
   type: docker-image
-  source: { repository: alpine }
+  source: { repository: alpine/git }
 
 inputs:
   - name: source
+  - name: pull-request
 
 run:
   path: sh
   args:
-  - -ec
+  - -exc
   - |
+    cd pull-request
+    git log --graph --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s" > log.txt
+    cat log.txt
+
     echo What is the answer?
-    grep 42 source/answer
+    grep 42 answer
