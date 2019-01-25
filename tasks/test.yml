@@ -1,0 +1,17 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: { repository: alpine }
+
+inputs:
+  - name: source
+
+run:
+  path: sh
+  args:
+  - -ec
+  - |
+    echo What is the answer?
+    grep 42 source/answer

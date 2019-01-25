@@ -1,0 +1,16 @@
+jobs:
+  - name: Check PR
+    plan:
+    - aggregate:
+      - get: source
+        trigger: false
+    - task: Perform Test
+      file: source/tasks/test.yml
+
+resources:
+  - name: source
+    type: git
+    source:
+      uri: git@github.com:suhlig/spike-concourse-pr-check.git
+      branch: master
+      access_token: ((github-token))
